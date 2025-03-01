@@ -76,6 +76,8 @@
 }
 
 @theme inline {
+  --font-poppins: var(--font-poppins);
+  --font-dynapuff: var(--font-dynapuff);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brand: #fa7275;
@@ -133,7 +135,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-poppins;
   }
 }
 
@@ -174,5 +176,28 @@
   }
   .overline {
     @apply text-[10px] leading-[14px] font-normal;
+  }
+
+  /* AUTH FORM */
+  .auth-form {
+    @apply flex max-h-[800px] w-full max-w-[580px] flex-col justify-center space-y-6 transition-all lg:h-full lg:space-y-8;
+  }
+  .form-title {
+    @apply text-center text-gray-400 md:text-left;
+  }
+  .form-item {
+    @apply flex h-[78px] flex-col justify-center rounded-xl border border-gray-200 px-4 shadow-lg;
+  }
+  .form-label {
+    @apply w-full pt-2 text-gray-400;
+  }
+  .form-input {
+    @apply border-none p-0 caret-gray-400 shadow-none ring-offset-transparent outline-none placeholder:text-gray-300 focus:ring-transparent focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:outline-none;
+  }
+  .form-message {
+    @apply text-error ml-4;
+  }
+  .form-submit-button {
+    @apply bg-brand hover:bg-brand-dark h-[66px] cursor-pointer rounded-full transition-all;
   }
 }
