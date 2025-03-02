@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import {useState} from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
@@ -16,6 +17,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
+import {createAccount, login} from '@/lib/actions/user-actions';
 import {AuthFormData, authFormSchema} from '@/lib/schema/auth-form';
 import {AuthFormType} from '@/types';
 
@@ -24,9 +26,11 @@ interface AuthFormProps {
 }
 
 const AuthForm = ({type}: AuthFormProps) => {
-  const formSchema = authFormSchema(type);
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [accountID, setAccountID] = useState(null);
 
+  const formSchema = authFormSchema(type);
   const form = useForm<AuthFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,7 +40,30 @@ const AuthForm = ({type}: AuthFormProps) => {
   });
 
   const onSubmit = async (values: AuthFormData) => {
-    console.log(values);
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const user =
+        type === 'register'
+          ? await createAccount({
+              fullName: values.fullName ?? '',
+              email: values.email
+            })
+          : await login({
+              email: values.email
+            });
+
+      setAccountID(user ? user.accountID : null);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Failed to create account. Please try again later.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -122,6 +149,14 @@ const AuthForm = ({type}: AuthFormProps) => {
           </div>
         </form>
       </Form>
+
+      {error && (
+        <p className='bg-error/5 text-error mx-auto mt-5 w-fit rounded-xl px-8 py-4 text-center'>
+          *{error}
+        </p>
+      )}
+
+      {accountID && <div>OTP MODAL</div>}
     </>
   );
 };
