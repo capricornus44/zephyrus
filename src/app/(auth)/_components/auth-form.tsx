@@ -6,6 +6,7 @@ import {useState} from 'react';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import {Button} from '@/components/ui/button';
 import {
@@ -27,7 +28,6 @@ interface AuthFormProps {
 
 const AuthForm = ({type}: AuthFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [accountID, setAccountID] = useState(null);
 
   const formSchema = authFormSchema(type);
@@ -41,7 +41,6 @@ const AuthForm = ({type}: AuthFormProps) => {
 
   const onSubmit = async (values: AuthFormData) => {
     setIsLoading(true);
-    setError('');
 
     try {
       const user =
@@ -57,9 +56,9 @@ const AuthForm = ({type}: AuthFormProps) => {
       setAccountID(user ? user.accountID : null);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        setError(error.message);
+        toast.error(error.message);
       } else {
-        setError('Failed to create account. Please try again later.');
+        toast.error('Failed to create account. Please try again later.');
       }
     } finally {
       setIsLoading(false);
@@ -149,12 +148,6 @@ const AuthForm = ({type}: AuthFormProps) => {
           </div>
         </form>
       </Form>
-
-      {error && (
-        <p className='bg-error/5 text-error mx-auto mt-5 w-fit rounded-xl px-8 py-4 text-center'>
-          *{error}
-        </p>
-      )}
 
       {accountID && <div>OTP MODAL</div>}
     </>

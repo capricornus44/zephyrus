@@ -2,6 +2,8 @@ import type {Metadata} from 'next';
 
 import {DynaPuff, Poppins} from 'next/font/google';
 
+import Providers from '@/components/providers';
+
 import './globals.css';
 
 const poppins = Poppins({
@@ -29,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${poppins.variable} ${dynaPuff.variable} antialiased`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
