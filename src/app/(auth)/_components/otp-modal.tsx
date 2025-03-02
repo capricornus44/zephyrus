@@ -6,16 +6,15 @@ import {useState} from 'react';
 
 import toast from 'react-hot-toast';
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle
-} from '@/components/ui/alert-dialog';
 import {Button} from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog';
 import {InputOTP, InputOTPGroup, InputOTPSlot} from '@/components/ui/input-otp';
 import {sendEmailOTP, verifySecret} from '@/lib/actions/user-actions';
 
@@ -54,17 +53,15 @@ const OTPModal = ({accountID, email}: OTPModalProps) => {
   };
 
   return (
-    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent className='alert-dialog'>
-        <AlertDialogHeader>
-          <AlertDialogTitle className='h2 text-center'>
-            Enter OTP
-          </AlertDialogTitle>
-          <AlertDialogDescription className='body-2 text-center text-gray-400'>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className='alert-dialog'>
+        <DialogHeader>
+          <DialogTitle className='h2 text-center'>Enter OTP</DialogTitle>
+          <DialogDescription className='body-2 text-center text-gray-400'>
             We&apos;ve sent a code to
             <span className='text-brand ml-1'>{email}</span>
-          </AlertDialogDescription>
-        </AlertDialogHeader>
+          </DialogDescription>
+        </DialogHeader>
 
         <InputOTP maxLength={6} value={otp} onChange={setOTP}>
           <InputOTPGroup className='otp-group'>
@@ -77,8 +74,8 @@ const OTPModal = ({accountID, email}: OTPModalProps) => {
           </InputOTPGroup>
         </InputOTP>
 
-        <AlertDialogFooter className='w-full gap-4'>
-          <AlertDialogAction
+        <DialogFooter className='w-full gap-4'>
+          <Button
             type='button'
             onClick={handleSubmit}
             className='button submit-button h-12'>
@@ -92,7 +89,7 @@ const OTPModal = ({accountID, email}: OTPModalProps) => {
                 className='ml-2 animate-spin'
               />
             )}
-          </AlertDialogAction>
+          </Button>
 
           <div className='body-2 flex flex-wrap items-center justify-center gap-1 text-center text-gray-400'>
             <span className='text-nowrap'>Didn&apos;t get a code?</span>
@@ -104,9 +101,9 @@ const OTPModal = ({accountID, email}: OTPModalProps) => {
               Click to resend
             </Button>
           </div>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
