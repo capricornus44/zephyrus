@@ -178,6 +178,14 @@
     @apply text-[10px] leading-[14px] font-normal;
   }
 
+  /* GENERAL */
+  .submit-button {
+    @apply bg-brand hover:bg-brand-dark cursor-pointer rounded-full transition-all;
+  }
+  .alert-dialog {
+    @apply max-w-[95%] space-y-4 rounded-xl bg-white px-4 py-10 outline-none sm:w-max md:rounded-3xl md:px-8;
+  }
+
   /* AUTH FORM */
   .auth-form {
     @apply flex max-h-[800px] w-full max-w-[580px] flex-col justify-center space-y-6 transition-all lg:h-full lg:space-y-8;
@@ -197,7 +205,12 @@
   .form-message {
     @apply text-error ml-4;
   }
-  .form-submit-button {
-    @apply bg-brand hover:bg-brand-dark h-[66px] cursor-pointer rounded-full transition-all;
+
+  /* DIALOG */
+  .otp-group {
+    @apply grid w-full grid-cols-6 gap-1 md:gap-3;
+  }
+  .otp-slot {
+    @apply text-brand-dark h-20 w-full rounded-md font-medium md:size-20;
   }
 }

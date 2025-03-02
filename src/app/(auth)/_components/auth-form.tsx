@@ -22,6 +22,8 @@ import {createAccount, login} from '@/lib/actions/user-actions';
 import {AuthFormData, authFormSchema} from '@/lib/schema/auth-form';
 import {AuthFormType} from '@/types';
 
+import OTPModal from './otp-modal';
+
 interface AuthFormProps {
   type: AuthFormType;
 }
@@ -119,7 +121,7 @@ const AuthForm = ({type}: AuthFormProps) => {
 
           <Button
             type='submit'
-            className='button form-submit-button'
+            className='button submit-button h-16'
             disabled={isLoading}>
             {type === 'register' ? 'Create Account' : 'Login'}
 
@@ -149,7 +151,9 @@ const AuthForm = ({type}: AuthFormProps) => {
         </form>
       </Form>
 
-      {accountID && <div>OTP MODAL</div>}
+      {accountID && (
+        <OTPModal accountID={accountID} email={form.getValues('email')} />
+      )}
     </>
   );
 };

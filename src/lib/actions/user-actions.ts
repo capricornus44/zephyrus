@@ -26,7 +26,7 @@ const getUserByEmail = async (email: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
-const sendEmailOTP = async ({email}: {email: string}) => {
+export const sendEmailOTP = async ({email}: {email: string}) => {
   const {account} = await createAdminClient();
 
   try {
@@ -117,14 +117,14 @@ export const getCurrentUser = async () => {
 
 export const verifySecret = async ({
   accountID,
-  password
+  otp
 }: {
   accountID: string;
-  password: string;
+  otp: string;
 }) => {
   try {
     const {account} = await createAdminClient();
-    const session = await account.createSession(accountID, password);
+    const session = await account.createSession(accountID, otp);
 
     (await cookies()).set('appwrite-session', session.secret, {
       path: '/',
