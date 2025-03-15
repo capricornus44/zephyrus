@@ -219,13 +219,13 @@
     @apply hidden h-screen w-[90px] flex-col overflow-auto px-5 py-7 sm:flex lg:w-[280px] xl:w-[325px];
   }
   .sidebar-navigation {
-    @apply text-brand mt-9 flex-1 gap-1;
+    @apply mt-9 flex-1 gap-1;
   }
   .sidebar-link {
-    @apply flex h-[52px] items-center justify-center gap-4 rounded-xl text-gray-400 lg:w-full lg:justify-start lg:rounded-full lg:px-[30px];
+    @apply hover:bg-brand/10 flex h-[52px] items-center justify-center gap-4 rounded-xl text-gray-400 select-none lg:w-full lg:justify-start lg:rounded-full lg:px-[30px];
   }
   .sidebar-link-active {
-    @apply bg-brand text-white shadow-2xl;
+    @apply bg-brand pointer-events-none text-white shadow-2xl;
   }
   .navigation-icon {
     @apply w-6 opacity-25 invert filter;
@@ -238,5 +238,55 @@
   }
   .sidebar-user-avatar {
     @apply aspect-square w-10 rounded-full border border-gray-200 object-cover;
+  }
+
+  /* HEADER */
+  .header {
+    @apply hidden items-center justify-between gap-5 p-5 sm:flex lg:py-7 xl:gap-10;
+  }
+  .header-container {
+    @apply flex min-w-fit items-center justify-center gap-4;
+  }
+  .logout-button {
+    @apply text-brand hover:bg-brand/10 h-[52px] min-w-[54px] cursor-pointer items-center justify-center rounded-full bg-transparent p-0 shadow-none transition-all;
+  }
+
+  /* Search */
+  .search {
+    @apply relative w-full md:max-w-[480px];
+  }
+  .search-input-container {
+    @apply flex h-[52px] flex-1 items-center gap-3 rounded-full px-4 shadow-xl;
+  }
+  .search-input {
+    @apply w-full border-none p-0 shadow-none ring-offset-transparent outline-none placeholder:text-gray-300 focus:ring-transparent focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:outline-none;
+  }
+  .search-result {
+    @apply absolute top-16 left-0 z-50 flex w-full flex-col gap-3 rounded-[20px] bg-white p-4;
+  }
+  .empty-result {
+    @apply text-center text-gray-400;
+  }
+
+  /* FILE UPLOADER */
+  .upload-button {
+    @apply bg-brand hover:bg-brand-dark h-[52px] cursor-pointer gap-2 rounded-full px-10 shadow-2xl transition-all;
+  }
+  .uploader-preview-list {
+    @apply fixed right-10 bottom-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-xl;
+  }
+  .uploader-preview-item {
+    @apply flex items-center justify-between gap-3 rounded-xl p-3 shadow-xl;
+  }
+  .preview-item-name {
+    @apply mb-2 line-clamp-1 max-w-[300px];
+  }
+
+  /* THUMBNAIL */
+  .thumbnail {
+    @apply bg-brand/10 size-[50px] min-w-[50px] items-center justify-center overflow-hidden rounded-full;
+  }
+  .thumbnail-image {
+    @apply size-full object-cover object-center;
   }
 }

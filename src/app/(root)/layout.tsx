@@ -10,7 +10,6 @@ export const dynamic = 'force-dynamic';
 
 const MainLayout = async ({children}: {children: ReactNode}) => {
   const currentUser = await getCurrentUser();
-  console.log(currentUser);
 
   if (!currentUser) return redirect('/login');
 
@@ -18,13 +17,14 @@ const MainLayout = async ({children}: {children: ReactNode}) => {
     <div className='flex h-screen'>
       <Sidebar {...currentUser} />
 
-      <section className='flex h-full flex-1 flex-col'>
+      <main className='flex h-full flex-1 flex-col'>
         <MobileNavigation {...currentUser} />
-        <Header />
-        <div className='main-content flex-1 rounded-4xl bg-gray-100 p-5'>
+        <Header userID={currentUser.$id} accountID={currentUser.accountID} />
+
+        <section className='main-content flex-1 rounded-4xl bg-gray-100 p-5'>
           {children}
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
   );
 };
