@@ -5,10 +5,9 @@ import {redirect} from 'next/navigation';
 
 import {ID, Query} from 'node-appwrite';
 
-import {AVATAR_TEMPLATE} from '@/constants';
-
 import {createAdminClient, createSessionClient} from '../appwrite';
 import {appwriteConfig} from '../appwrite/config';
+import {parseStringify} from '../utils';
 
 const handleError = (error: unknown, message: string) => {
   console.log(error, message);
@@ -20,7 +19,7 @@ const getUserByEmail = async (email: string) => {
   const result = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
-    [Query.equal('email', email)]
+    [Query.equal('email', [email])]
   );
 
   return result.total > 0 ? result.documents[0] : null;
@@ -58,14 +57,12 @@ export const createAccount = async ({
         fullName,
         email,
         accountID,
-        avatar: AVATAR_TEMPLATE
+        avatar: '/images/avatar.png'
       }
     );
   }
 
-  return {
-    accountID
-  };
+  return parseStringify({accountID});
 };
 
 export const login = async ({email}: {email: string}) => {
@@ -74,10 +71,10 @@ export const login = async ({email}: {email: string}) => {
 
     if (existingUser) {
       await sendEmailOTP({email});
-      return {accountID: existingUser.accountID};
+      return parseStringify({accountID: existingUser.accountID});
     }
 
-    return {accountID: null, error: 'Account not found'};
+    return parseStringify({accountID: null, error: 'Account not found'});
   } catch (error) {
     handleError(error, 'Failed to log in user');
   }
@@ -109,7 +106,7 @@ export const getCurrentUser = async () => {
 
     if (user.total <= 0) return null;
 
-    return user.documents[0];
+    return parseStringify(user.documents[0]);
   } catch (error) {
     handleError(error, 'Failed to get current user');
   }
@@ -133,7 +130,7 @@ export const verifySecret = async ({
       secure: true
     });
 
-    return {sessionID: session.$id};
+    return parseStringify({sessionID: session.$id});
   } catch (error) {
     handleError(error, 'Failed to verify OTP');
   }

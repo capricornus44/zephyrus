@@ -1,2 +1,27 @@
-export const AVATAR_TEMPLATE =
-  'https://www.google.com/imgres?q=avatar%20placeholder&imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fprofile-picture-placeholder-avatar-silhouette-gray-tones-icon-colored-shapes-gradient_1076610-40164.jpg&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fprofile-picture-placeholder-avatar-silhouette-gray-tones-icon-colored-shapes-gradient_291679346.htm&docid=JmCAdT-ARNTcQM&tbnid=IQNxyKKz8qkB0M&vet=12ahUKEwi814yyq-uLAxUhUVUIHS5VCAs4FBAzegQIXBAA..i&w=626&h=626&hcb=2&ved=2ahUKEwi814yyq-uLAxUhUVUIHS5VCAs4FBAzegQIXBAA';
+export const routes = [
+  {
+    name: 'Dashboard',
+    icon: '/icons/dashboard.svg',
+    url: '/'
+  },
+  {
+    name: 'Documents',
+    icon: '/icons/documents.svg',
+    url: '/documents'
+  },
+  {
+    name: 'Images',
+    icon: '/icons/images.svg',
+    url: '/images'
+  },
+  {
+    name: 'Media',
+    icon: '/icons/video.svg',
+    url: '/media'
+  },
+  {
+    name: 'Others',
+    icon: '/icons/others.svg',
+    url: '/others'
+  }
+];
